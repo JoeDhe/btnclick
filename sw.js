@@ -14,6 +14,10 @@ self.addEventListener('install', function(e) {
   self.skipWaiting();
 });
 
+self.addEventListener("activate", event => {
+   console.log("Service worker activated");
+});
+
 /* Serve cached content when offline */
 self.addEventListener('fetch', function(e) {
   e.respondWith(
