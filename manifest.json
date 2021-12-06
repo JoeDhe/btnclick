@@ -4,27 +4,28 @@
   "start_url": "./apps.html",
   "display": "standalone",
   "orientation": "portrait-primary",
-  "background_color": "#82d273",
-  "theme_color": "#82d273"
-  "icons": [{
-    "src": "https://drive.google.com/uc?export=view&id=1bYFWFEiksjv1IvaCjYI8U3GQt-cPov_T",
-      "sizes": "256x256",
+  "background_color": "#ccc",
+  "theme_color": "#5FAAE5",
+  "icons": [
+    {
+      "src": "https://drive.google.com/uc?export=view&id=1bYFWFEiksjv1IvaCjYI8U3GQt-cPov_T",
+      "sizes": "196x196",
       "type": "image/png"
-    }, {
+    },
+    {
+      "src": "https://drive.google.com/uc?export=view&id=1bYFWFEiksjv1IvaCjYI8U3GQt-cPov_T",
+      "sizes": "144x144",
+      "type": "image/png"
+    },
+    {
       "src": "https://drive.google.com/uc?export=view&id=1bYFWFEiksjv1IvaCjYI8U3GQt-cPov_T",
       "sizes": "256x256",
       "type": "image/png"
-    }, {
+    },
+    {
       "src": "https://drive.google.com/uc?export=view&id=1bYFWFEiksjv1IvaCjYI8U3GQt-cPov_T",
-      "sizes": "256x256",
+      "sizes": "512x512",
       "type": "image/png"
-    }, {
-      "src": "https://drive.google.com/uc?export=view&id=1bYFWFEiksjv1IvaCjYI8U3GQt-cPov_T",
-      "sizes": "256x256",
-      "type": "image/png"
-    }, {
-      "src": "https://drive.google.com/uc?export=view&id=1bYFWFEiksjv1IvaCjYI8U3GQt-cPov_T",
-      "sizes": "256x256",
-      "type": "image/png"
-    }],
+    }
+  ]
 }
