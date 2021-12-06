@@ -94,8 +94,8 @@
             document.cookie = "appinstalled=false;expires=Tue, 30 Mar 2023 23:59:59 GMT;path=/";
           })
       
-               if ('getInstalledRelatedApps' in window.navigator) {
                let relatedApps = await window.navigator.getInstalledRelatedApps();
+               if ('getInstalledRelatedApps' in window.navigator) {
                if (relatedApps.length > 0){
                   installed = true;
                }
