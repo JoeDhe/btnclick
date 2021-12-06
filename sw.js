@@ -9,6 +9,7 @@ self.addEventListener('install', function (event) {
         cache.addAll([
           './',
           './index.html',
+          './apps.html',
         ]);
       })
   );
