@@ -94,15 +94,19 @@
             document.cookie = "appinstalled=false;expires=Tue, 30 Mar 2023 23:59:59 GMT;path=/";
           })
             
-            //a somewhat verbose approach to iOS detection
-            function isThisDeviceRunningiOS(){
-              if (['iPad Simulator', 'iPhone Simulator','iPod Simulator', 'iPad','iPhone','iPod'].includes(navigator.platform)){
-               return true;
-              }
-                else {
-                return false;
-              }
+          //a somewhat verbose approach to iOS detection
+          function isThisDeviceRunningiOS(){
+            if (['iPad Simulator', 'iPhone Simulator','iPod Simulator', 'iPad','iPhone','iPod'].includes(navigator.platform)){
+             return true;
             }
+            // iPad on iOS 13  
+            else if (navigator.userAgent.includes("Mac") && "ontouchend" in document)){
+              return true;
+            }   
+            else {
+              return false;
+            }
+          }
                        
     </script>
     
