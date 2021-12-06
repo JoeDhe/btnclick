@@ -1,34 +1,31 @@
 {
-  "name": "Hello World",
-  "short_name": "Hello",
-  "icons": [{
-    "src": "images/hello-icon-128.png",
-      "sizes": "128x128",
+  "name": "A basic Progressive Web App",
+  "short_name": "Basic PWA",
+  "start_url": ".",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#ccc",
+  "theme_color": "#5FAAE5",
+  "icons": [
+    {
+      "src": "https://cdn-icons.flaticon.com/png/512/1180/premium/1180304.png?token=exp=1638803075~hmac=cbbc7282af11e3ce8704061801707e56",
+      "sizes": "96x96",
       "type": "image/png"
-    }, {
-      "src": "images/hello-icon-144.png",
+    },
+    {
+      "src": "https://cdn-icons.flaticon.com/png/512/1180/premium/1180304.png?token=exp=1638803075~hmac=cbbc7282af11e3ce8704061801707e56",
       "sizes": "144x144",
       "type": "image/png"
-    }, {
-      "src": "images/hello-icon-152.png",
-      "sizes": "152x152",
-      "type": "image/png"
-    }, {
-      "src": "images/hello-icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    }, {
-      "src": "images/hello-icon-256.png",
+    },
+    {
+      "src": "https://cdn-icons.flaticon.com/png/512/1180/premium/1180304.png?token=exp=1638803075~hmac=cbbc7282af11e3ce8704061801707e56",
       "sizes": "256x256",
       "type": "image/png"
-    }, {
-      "src": "images/hello-icon-512.png",
+    },
+    {
+      "src": "https://cdn-icons.flaticon.com/png/512/1180/premium/1180304.png?token=exp=1638803075~hmac=cbbc7282af11e3ce8704061801707e56",
       "sizes": "512x512",
       "type": "image/png"
-    }],
-  "lang": "en-US",
-  "start_url": "/index.html",
-  "display": "standalone",
-  "background_color": "white",
-  "theme_color": "white"
+    }
+  ]
 }
