@@ -16,12 +16,12 @@
   
   </head>
     <body>
-    <div class="container d-flex vh-100">    
-    <div class="card border-white justify-content-center text-center align-self-center">
+    <div class="container d-flex vh-100 justify-content-center text-center align-self-center">    
+    <div class="card border-white ">
     <img class="p-2 mx-auto "src="https://drive.google.com/uc?export=view&id=1bYFWFEiksjv1IvaCjYI8U3GQt-cPov_T" class="card-img-top" width="250">
     <div class="card-body">
       <p class="card-text">Silakan klik tombol dibawah ini untuk menginstall aplikasi</p>
-      <div id="installBtn" class="btn alert alert-success fw-bold fs-4 text-center" disabled>Install Aplikasi Dalam.. <span id="count"></span></div>
+      <div id="installBtn" class="alert alert-success fw-bold fs-4 text-center text-light" disabled>Tunggu sebentar <span id="count"></span></div>
     </div>          
      </div>
    </div>
@@ -112,7 +112,7 @@
       // Countdown button installation 15" reff:https://coderedirect.com/questions/567803/enable-button-when-counter-reaches-zero
           let spn = document.getElementById("count");
 
-          let count = 10;     // Set count
+          let count = 12;     // Set count
           let timer = null;  // For referencing the timer
 
           (function countDown(){
@@ -126,7 +126,8 @@
             } else {
               // Enable the button
               installButton.removeAttribute("disabled");
-              installButton.textContent = "Install Sekarang";
+              installButton.textContent = "Install Aplikasi Sekarang";
+              installButton.classList.remove('text-light');
             }
           }());
     </script>
