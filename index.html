@@ -21,7 +21,7 @@
     <img class="p-2 mx-auto "src="https://drive.google.com/uc?export=view&id=1bYFWFEiksjv1IvaCjYI8U3GQt-cPov_T" class="card-img-top" width="250">
     <div class="card-body">
       <p class="card-text">Silakan klik tombol dibawah ini untuk menginstall aplikasi</p>
-      <div id="installBtn" class="alert alert-success fw-bold fs-4 text-center" disabled>Install Aplikasi Dalam.. <span id="count"></span></div>
+      <div id="installBtn" class="btn alert alert-success fw-bold fs-4 text-center" disabled>Install Aplikasi Dalam.. <span id="count"></span></div>
     </div>          
      </div>
    </div>
@@ -110,10 +110,10 @@
             
       
       // Countdown button installation 15" reff:https://coderedirect.com/questions/567803/enable-button-when-counter-reaches-zero
-          var spn = document.getElementById("count");
+          let spn = document.getElementById("count");
 
-          var count = 10;     // Set count
-          var timer = null;  // For referencing the timer
+          let count = 10;     // Set count
+          let timer = null;  // For referencing the timer
 
           (function countDown(){
             // Display counter and start counting down
