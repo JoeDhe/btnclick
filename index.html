@@ -111,7 +111,6 @@
       
       // Countdown button installation 15" reff:https://coderedirect.com/questions/567803/enable-button-when-counter-reaches-zero
           var spn = document.getElementById("count");
-          var btn = document.getElementById("btnCounter");
 
           var count = 10;     // Set count
           var timer = null;  // For referencing the timer
@@ -126,8 +125,8 @@
               count--; // decrease the timer
             } else {
               // Enable the button
-              btn.removeAttribute("disabled");
-              btn.textContent = "Install Sekarang";
+              installButton.removeAttribute("disabled");
+              installButton.textContent = "Install Sekarang";
             }
           }());
     </script>
