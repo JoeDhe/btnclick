@@ -1,14 +1,14 @@
 {
-  "name": "Alfirdaus Pocket",
+  "name": "",
   "short_name": "AlfirdausApp",
   "start_url": "./apps.html",
   "display": "standalone",
   "orientation": "portrait-primary",
-  "background_color": "#ccc",
-  "theme_color": "#5FAAE5",
+  "background_color": "white",
+  "theme_color": "green",
   "icons": [
     {
-      "src": "https://drive.google.com/uc?export=view&id=1bYFWFEiksjv1IvaCjYI8U3GQt-cPov_T",
+      "src": "",
       "sizes": "256x256",
       "type": "image/png"
     },
