@@ -10,6 +10,9 @@ self.addEventListener('install', function (event) {
           './',
           './index.html',
           './apps.html',
+          'https://script.google.com/macros/s/AKfycbyI2upLldJVAirdKywq5siMVJp2j55_gFJTv5cXTIKOcUu8hdCcYbBd2G5ciaHODzIRFA/exec',
+          'https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css',
+          'https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js',
         ]);
       })
   );
