@@ -1,139 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>PocketApp Install</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <!-- pwa manifest -->
-    <link rel="manifest" href="./manif.json" />
-    <!-- Older android support -->
-    <meta name="theme-color" content="white" />
-    <!-- ios support -->
-    <link rel="apple-touch-icon" href="https://drive.google.com/uc?export=view&id=1bYFWFEiksjv1IvaCjYI8U3GQt-cPov_T" />
-    <meta name="apple-mobile-web-app-status-bar" content="white" />
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3102257023257490"
-     crossorigin="anonymous"></script>
-  
-  </head>
-    <body>
-    <div class="container d-flex vh-100 justify-content-center text-center align-self-center">    
-    <div class="card border-white justify-content-center text-center align-self-center">
-    <img class="p-2 mx-auto "src="https://drive.google.com/uc?export=view&id=1bYFWFEiksjv1IvaCjYI8U3GQt-cPov_T" class="card-img-top" width="250">
-    <div class="card-body">
-      <p class="card-text" id="card-text">Silakan klik tombol dibawah ini untuk menginstall aplikasi</p>
-      <div id="installBtn" class="alert alert-success fw-bold fs-4 text-center text-light" disabled>Tunggu sebentar <span id="count"></span></div>
-    </div>          
-     </div>
-   </div>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8T94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="./manif.json">
+    <meta name="theme-color" content="white">
+    
+    <!-- iOS Support -->
+    <link rel="apple-touch-icon" href="https://drive.google.com/uc?export=view&id=1bYFWFEiksjv1IvaCjYI8U3GQt-cPov_T">
+    <meta name="apple-mobile-web-app-status-bar" content="white">
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3102257023257490" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container d-flex vh-100 justify-content-center align-items-center text-center">    
+        <div class="card border-white text-center">
+            <img class="p-2 mx-auto" src="https://drive.google.com/uc?export=view&id=1bYFWFEiksjv1IvaCjYI8U3GQt-cPov_T" alt="App Icon" width="250">
+            <div class="card-body">
+                <p class="card-text" id="card-text">Silakan klik tombol dibawah ini untuk menginstall aplikasi</p>
+                <button id="installBtn" class="alert alert-success fw-bold fs-4 text-center" disabled>Tunggu sebentar <span id="count"></span></button>
+            </div>          
+        </div>
+    </div>
     
     <script>
-      
- // Registering serviceWorker
-     if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('./sw.js')
-               console.log('SW registered');
-      }
+        // Register the service worker
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('./sw.js').then(() => {
+                console.log('Service Worker registered');
+            }).catch(err => {
+                console.error('Service Worker registration failed:', err);
+            });
+        }
 
-// Starting button install config, refference: https://javascript.plainenglish.io/creating-a-browser-agnostic-pwa-install-button-41039f312fbe    
-      let prompt;
-      window.addEventListener('beforeinstallprompt', function(e){
-        // Prevent the mini-infobar from appearing on mobile
-        e.preventDefault();
-        // Stash the event so it can be triggered later.
-        prompt = e;
-      });
-      let cardInfo = document.getElementById("card-text");
-      let installButton = document.getElementById("installBtn");
-      installButton.addEventListener('click', function(){
-         prompt.prompt();
-      })
-      
-      let installed = false;
-      installButton.addEventListener('click', async function(){
-        prompt.prompt();
-        let result = await that.prompt.userChoice;
-        if (result&&result.outcome === 'accepted') {
-           installed = true;
-        }
-      })
-      
-      window.addEventListener('appinstalled', async function(e) {
-        installButton.style.display = "none";
-        cardInfo.textContent = "Aplikasi berhasil diinstall, silakan buka lewat home screen."
-      });
-      
-      let installable = true;
-        if (!('serviceWorker' in navigator)){
-          installable = false;
-        }
-      
-      //check when the page is loaded if it matches one of the PWA display modes
-        window.addEventListener('DOMContentLoaded', function(){
-           if (navigator.standalone || window.matchMedia('(display-mode: standalone)').matches || window.matchMedia('(display-mode: fullscreen)').matches || window.matchMedia('(display-mode: minimal-ui)').matches) {
-             installed = true;
+        // Variables to manage the install prompt
+        let promptEvent;
+        let installButton = document.getElementById('installBtn');
+        let cardInfo = document.getElementById("card-text");
+
+        // Countdown for enabling install button
+        let count = 12;
+        let spn = document.getElementById("count");
+        let timer = null;
+
+        // Countdown function to enable the button after 12 seconds
+        (function countDown() {
+            spn.textContent = count;
+            if (count !== 0) {
+                timer = setTimeout(countDown, 1000);
+                count--;
+            } else {
+                installButton.removeAttribute("disabled");
+                installButton.textContent = "Install Aplikasi Sekarang";
+                installButton.classList.remove('text-light');
             }
+        })();
+
+        // Listen for the 'beforeinstallprompt' event
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            promptEvent = e;  // Stash the event for later use
+            installButton.removeAttribute('disabled');
+            installButton.textContent = "Install Aplikasi Sekarang";
         });
 
-        //but also add a listener. After app installation on desktop, the app will open in their own window right away.
-        window.addEventListener('DOMContentLoaded', function(){
-           window.matchMedia('(display-mode: standalone)').addListener(function(e){
-             if (e.matches) { installed = true;}
-           });
-           window.matchMedia('(display-mode: fullscreen)').addListener(function(e){
-             if (e.matches) { installed = true;}
-           });
-           window.matchMedia('(display-mode: minimal-ui)').addListener(function(e){
-             if (e.matches) { installed = true; }
-           });
-         });
-      
-          window.addEventListener('appinstalled', function(){
-            document.cookie = "appinstalled=true;expires=Tue, 30 Mar 2025 23:59:59 GMT;path=/";
-          })
+        // Click event to show the install prompt
+        installButton.addEventListener('click', async () => {
+            if (!promptEvent) return;
+            promptEvent.prompt();  // Show the install prompt
 
-          window.addEventListener('beforeinstallprompt', function(){
-            document.cookie = "appinstalled=false;expires=Tue, 30 Mar 2023 23:59:59 GMT;path=/";
-          })
-            
-          //a somewhat verbose approach to iOS detection
-          function isThisDeviceRunningiOS(){
-            if (['iPad Simulator', 'iPhone Simulator','iPod Simulator', 'iPad','iPhone','iPod'].includes(navigator.platform)){
-             return true;
+            const { outcome } = await promptEvent.userChoice;
+            if (outcome === 'accepted') {
+                installButton.style.display = "none";
+                cardInfo.textContent = "Aplikasi berhasil diinstall, silakan buka lewat home screen.";
             }
-            // iPad on iOS 13  
-            else if (navigator.userAgent.includes("Mac") && "ontouchend" in document){
-              return true;
-            }   
-            else {
-              return false;
-            }
-          }
-            
-      
-      // Countdown button installation 12' reff:https://coderedirect.com/questions/567803/enable-button-when-counter-reaches-zero
-          let spn = document.getElementById("count");
-          let count = 12;     // Set count
-          let timer = null;  // For referencing the timer
+            promptEvent = null;
+        });
 
-          (function countDown(){
-            // Display counter and start counting down
-            spn.textContent = count;
+        // Listen for the 'appinstalled' event
+        window.addEventListener('appinstalled', () => {
+            installButton.style.display = "none";
+            cardInfo.textContent = "Aplikasi berhasil diinstall, silakan buka lewat home screen.";
+            document.cookie = "appinstalled=true; expires=Tue, 30 Mar 2025 23:59:59 GMT; path=/";
+        });
 
-            // Run the function again every second if the count is not zero
-            if(count !== 0){
-              timer = setTimeout(countDown, 1000);
-              count--; // decrease the timer
-            } else {
-              // Enable the button
-              installButton.removeAttribute("disabled");
-              installButton.textContent = "Install Aplikasi Sekarang";
-              installButton.classList.remove('text-light');
+        // Check if the app is already installed
+        window.addEventListener('DOMContentLoaded', () => {
+            if (window.matchMedia('(display-mode: standalone)').matches || window.matchMedia('(display-mode: fullscreen)').matches || window.matchMedia('(display-mode: minimal-ui)').matches) {
+                installButton.style.display = "none";
+                cardInfo.textContent = "Aplikasi berhasil diinstall, silakan buka lewat home screen.";
             }
-          }());
+        });
     </script>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-  </body>
+</body>
 </html>
